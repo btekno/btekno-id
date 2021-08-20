@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
  * 8. Member Area
  *    - Notifications
  *    - Settings
- * 9. 404 Fallback
+ *    - Mentions
+ * 9. Plugins
+ *    - Popover
+ *    - Shortcuts
+ * 10. 404 Fallback
  */
 Route::namespace('App\Http\Controllers')->domain(env('APP_DOMAIN'))->group(function() {
     #### Authentication
@@ -89,7 +93,23 @@ Route::namespace('App\Http\Controllers')->domain(env('APP_DOMAIN'))->group(funct
             Route::get('data/export/account', 'DataController@exportAccount')->name('export.account');
             Route::get('data/export/logs', 'DataController@exportLogs')->name('export.logs');
         });
+        
+        #### Mentions
+        Route::prefix('mention')->as('mention.')->group(function () {
+            Route::get('users', 'MentionController@users');
+        });
     }); 
+
+    ## Plugins
+    Route::namespace('Plugin')->prefix('plugins')->as('plugins.')->group(function () {
+        #### Popover
+        Route::prefix('popover')->as('popover.')->group(function () {
+            Route::get('user/{user}', 'PopoverController@user')->name('user');
+        });
+
+        #### Shortcuts
+        Route::view('shortcuts', 'plugins.shortcuts')->name('shortcuts');
+    });
 
     #### 404 Fallback
     Route::fallback(function () {
