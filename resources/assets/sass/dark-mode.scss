@@ -1,0 +1,271 @@
+$body-bg: #06090f !important;
+$card-bg: #0d1117;
+$border-bg: #30363d;
+$input-bg: #161b22;
+
+a:hover {
+  color: #7d79cc;
+}
+
+body {
+  background-color: $body-bg;
+  color: #c9d1d9;
+}
+
+.navbar {
+  background-color: $input-bg !important;
+}
+
+.nav-link {
+  color: white !important;
+
+  .active {
+    border-color: $border-bg $border-bg $border-bg !important;
+  }
+}
+
+.nav-link.active,
+.nav-link:hover {
+  border-color: $border-bg $border-bg $border-bg !important;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid $border-bg !important;
+}
+
+#search-input {
+  background-color: $card-bg !important;
+  border: 1px solid $border-bg !important;
+}
+
+.card,
+.popover {
+  background-color: $card-bg;
+  color: white;
+  border: 1px solid $border-bg;
+
+  .popover-header,
+  .card-header {
+    background-color: $input-bg;
+  }
+}
+
+.list-group-item {
+  background-color: $card-bg;
+  border: 1px solid $border-bg;
+}
+
+.form-control:focus {
+  background-color: $input-bg;
+  border-color: $border-bg;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: $input-bg;
+}
+
+.form-check-input {
+  background-color: $border-bg;
+}
+
+.text-secondary {
+  color: #c0c0c0 !important;
+}
+
+.text-dark,
+.link-dark {
+  color: #c9d1d9 !important;
+}
+
+.score {
+  color: black !important;
+}
+
+.dropdown-menu {
+  background-color: $card-bg;
+  border: 1px solid #30363d !important;
+
+  .dropdown-item {
+    color: white;
+
+    &:hover {
+      background-color: $body-bg;
+    }
+  }
+}
+
+.dropdown-divider {
+  border-top: 1px solid $border-bg;
+}
+
+.form-control,
+.form-select {
+  background-color: $input-bg;
+  color: white !important;
+  border: 1px solid $border-bg;
+}
+
+.form-control::-webkit-file-upload-button {
+  color: white;
+  background-color: $body-bg;
+}
+
+.input-group-text {
+  background-color: $input-bg;
+  color: white;
+  border: 1px solid $border-bg;
+}
+
+.accordion-item {
+  border: 1px solid $border-bg;
+}
+
+.form-file-label {
+  border-color: $border-bg;
+}
+
+.progress {
+  background-color: $body-bg;
+}
+
+.border-bottom,
+hr {
+  border-bottom: 1px solid $border-bg !important;
+}
+
+.recent-questions {
+  span {
+    color: black;
+  }
+}
+
+.modal-content,
+.accordion-body,
+.accordion-item {
+  background-color: $card-bg;
+}
+
+.modal-header,
+.popover-header {
+  border-bottom: 1px solid $border-bg;
+}
+
+.modal-footer {
+  border-top: 1px solid $border-bg;
+}
+
+.tribute-container {
+  background-color: $card-bg;
+  border: 1px solid $border-bg;
+}
+
+.tribute-container ul {
+  background: $border-bg;
+}
+
+.tribute-container li {
+  background: $card-bg;
+
+  &.highlight {
+    background: $border-bg;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 6px 6px 6px 6px #adb5bd;
+}
+
+.tippy-box {
+  background-color: $input-bg !important;
+  border: 1px solid $border-bg !important;
+}
+
+.tippy-arrow:before {
+  border-top-color: $input-bg !important;
+}
+
+.tippy-arrow:after {
+  border-top-color: rgb(255 255 255 / 20%) !important;
+}
+
+.body-font {
+  color: #ced4da;
+}
+
+.taskord-spinner {
+  border: 3px solid #495057;
+  border-right-color: white;
+}
+
+.github-logo {
+  filter: invert(1);
+}
+
+.explore-nav {
+  background-color: $border-bg !important;
+}
+
+.avatar-stack {
+  .avatar {
+    border: 2px solid $border-bg;
+  }
+
+  .replies-avatar {
+    border: 1px solid $border-bg;
+  }
+}
+
+.bg-light {
+  background-color: $card-bg !important;
+}
+
+.bg-body,
+.bg-oembed {
+  background-color: $body-bg !important;
+}
+
+.bg-white {
+  background-color: $input-bg !important;
+}
+
+.btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.toast {
+  background-color: $card-bg !important;
+  border: 1px solid $border-bg;
+}
+
+.border-reply {
+  border: 1px solid $border-bg !important;
+}
+
+.border-top {
+  border-top: 1px solid $border-bg !important;
+}
+
+.border-start {
+  border-left: 1px solid $border-bg !important;
+}
+
+::-webkit-scrollbar {
+  background-color: $border-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $border-bg;
+  border: 2px solid $border-bg;
+}
+
+.ssc-circle,
+.ssc-head-line,
+.ssc-line,
+.ssc-square {
+  background-color: #212529;
+
+  &::after {
+    background: none;
+  }
+}

@@ -37,12 +37,12 @@
     ])->withFullUrl() !!}
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @if (Cookie::get('color_mode') === 'dark')
-        {{-- <link href="{{ mix('css/darkmode.css') }}" rel="stylesheet"> --}}
+        <link href="{{ mix('css/dark-mode.css') }}" rel="stylesheet">
     @endif
     @if (Cookie::get('color_mode') === 'auto')
-        {{-- <link href="{{ mix('css/automode.css') }}" rel="stylesheet"> --}}
+        <link href="{{ mix('css/auto-mode.css') }}" rel="stylesheet">
     @endif
 
     <livewire:styles />
@@ -100,8 +100,8 @@
 
 <livewire:scripts />
 
-{{-- <script src="{{ mix('js/bootstrap.js') }}" defer></script>
-<script src="{{ mix('js/app.js') }}" defer></script> --}}
+<script src="{{ mix('js/bootstrap.js') }}" defer></script>
+<script src="{{ mix('js/app.js') }}" defer></script>
 
 @yield('js')
 </html>

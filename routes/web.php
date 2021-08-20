@@ -109,6 +109,9 @@ Route::namespace('App\Http\Controllers')->domain(env('APP_DOMAIN'))->group(funct
 
         #### Shortcuts
         Route::view('shortcuts', 'plugins.shortcuts')->name('shortcuts');
+
+        #### Dark Mode
+        Route::get('dark-mode', 'PluginController@darkMode')->name('dark-mode');
     });
 
     #### 404 Fallback
