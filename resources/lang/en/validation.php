@@ -124,6 +124,8 @@ return [
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
+    'indisposable' => 'Disposable email addresses are not allowed.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
