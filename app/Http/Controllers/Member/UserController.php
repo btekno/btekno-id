@@ -1,0 +1,9 @@
+profileSettings
+accountSettings
+passwordSettings
+appearanceSettings
+notifySettings
+apiSettings
+sessionsSettings
+logsSettings
+deleteSettings

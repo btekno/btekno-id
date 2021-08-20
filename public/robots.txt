@@ -1,2 +1,14 @@
+User-agent: baidu
+crawl-delay: 1
+
 User-agent: *
-Disallow:
+
+Disallow: /search
+Disallow: /password
+Disallow: /settings
+Disallow: /livewire
+Disallow: /notifications
+Disallow: /suspended
+
+Sitemap: https://btekno.id/sitemap_urls.txt
+Sitemap: https://btekno.id/sitemap_users.txt

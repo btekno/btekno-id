@@ -1,0 +1,3 @@
+Contact: novay@btekno.id
+Preferred-Languages: id
+Policy: https://btekno.id/privacy
