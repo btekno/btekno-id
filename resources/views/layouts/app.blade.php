@@ -25,14 +25,12 @@
 </head> 
 <body>
     @include('layouts.partials.sidenav')
-    <div id="wrapper">
+    <div id="wrapper" class="@yield('wrapper-class')">
         
         @include('layouts.partials.header')
         @yield('sidebar')
 
-        <div class="main_content">
-            @yield('content')
-        </div>
+        @yield('content')
     </div>
  
      <script>
