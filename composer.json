@@ -9,6 +9,7 @@
         "blade-ui-kit/blade-heroicons": "^1.2",
         "devfactory/minify": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
+        "grosv/laravel-passwordless-login": "^1.6",
         "guzzlehttp/guzzle": "^7.0.1",
         "htmlmin/htmlmin": "^8.0",
         "laravel/framework": "^8.54",
