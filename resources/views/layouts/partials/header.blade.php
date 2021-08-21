@@ -56,7 +56,13 @@
             <div class="right_side">
 
                 <div class="header_widgets">
-                    <a href="#" class="is_link">Login or Register</a>
+                    @auth
+                        <a href="#" aria-expanded="false">
+                            <img src="assets/images/avatars/avatar-2.jpg" class="is_avatar" alt="">
+                        </a>
+                    @else
+                        <a href="#" class="is_link">Login or Register</a>
+                    @endauth
                     <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
                         <a href="#" id="night-mode" class="btn-night-mode">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -67,12 +73,24 @@
                                 <span class="uk-switch-button"></span>
                             </span>
                         </a>
-                        <a href="{{ route('login') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                            </svg>
-                            Login or Register
-                        </a>                        
+
+                        @auth
+                            <a class="dropdown-item text-dark" href="{{ route('logout') }}" data-prefetch="false"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <x-heroicon-o-logout class="heroicon heroicon-18px text-secondary" />
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                </svg>
+                                Login or Register
+                            </a>    
+                        @endauth                    
                     </div>
                 </div>
                 

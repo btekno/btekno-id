@@ -9,7 +9,7 @@
 {{-- Content --}}
 @section('content')
     <div class="uk-flex uk-flex-middle uk-grid-collapse uk-grid-match" uk-grid>
-        <div class="form-media uk-width-2-3@m uk-width-1-2@s uk-visible\@s uk-height-viewport uk-background-cover" data-src="https://my.btekno.id/assets/v1/img/bg-login.jpg" uk-img>        
+        <div class="form-media uk-width-2-3@m uk-width-1-2@s uk-visible\@s uk-height-viewport uk-background-cover" data-src="{{ asset('assets/images/bg/bg-login.jpg') }}" uk-img>        
 
             <div class="form-media-content uk-light"> 
                 <h1>It's not about coffee or food, <br/>it's about togetherness.</h1>
@@ -48,7 +48,7 @@
                     </a>
                 </div>
 
-                <p class="fs-6 text-muted mb-3">
+                <p class="fw-normal text-muted mb-3">
                     Or simply enter your email and password
                 </p>
 
@@ -76,7 +76,7 @@
 
                     <div class="form-group mt-3 mb-3">
                         <script src="https://www.google.com/recaptcha/api.js"></script>
-                        <div class="g-recaptcha" data-sitekey="6Lekpr8ZAAAAAJ3JzPiBooYjB5fCxHXw10ifcCcU"></div>
+                        <div class="g-recaptcha" data-sitekey="{{ config('btekno.plugins.recaptcha.key') }}"></div>
                         @error('g-recaptcha-response')
                             <small class="text-danger ms-2">
                                 <small>{{ $message }}</small>

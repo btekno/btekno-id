@@ -54,16 +54,59 @@
         <div id="app">
             @include('layouts.partials.sidenav')
             <div id="wrapper" class="@yield('wrapper-class')">
-                
                 @include('layouts.partials.header')
+                
+                @if(session()->has('global'))
+                    <div class="alert alert-success alert-dismissible fade show rounded-0 mb-0" style="top: 65px;">
+                        <button type="button" class="btn-close small" data-bs-dismiss="alert"></button>
+                        <x-heroicon-o-check class="heroicon" />
+                        {{ session('global') }}
+                    </div>
+                @endif
+                @auth
+                    @if(auth()->user()->is_spam)
+                        <div class="alert alert-danger rounded-0" role="alert" style="top: 65px;">
+                            <div class="fw-bold">
+                                <x-heroicon-o-flag class="heroicon" />
+                                Your account has been flagged.
+                            </div>
+                            <div class="mt-1">
+                                Because of that, your profile will be hidden from the public. If you believe this is a mistake, <a
+                                    href="" target="_blank"
+                                    rel="noreferrer">contact support</a> to have your account status reviewed.
+                            </div>
+                        </div>
+                    @endif
+                    @if(!auth()->user()->hasVerifiedEmail())
+                        <div class="alert alert-warning rounded-0" role="alert" style="top: 65px;">
+                            <div class="fw-bold">
+                                <x-heroicon-o-mail class="heroicon" />
+                                Verify Your Email Address
+                            </div>
+                            <form class="mt-1" method="POST" action="{{ route('verification.resend') }}">
+                                @csrf
+                                Before proceeding, please check your email for a verification link. If you did not receive the
+                                email,
+                                <button type="submit" class="align-baseline btn m-0 p-0 rm-shadow text-primary">click here to
+                                    request another</button>.
+                            </form>
+                        </div>
+                    @endif
+                @else
+                    @if(Route::is('index'))
+                        {{-- @include('main.index') --}}
+                    @endif
+                @endauth
+
                 @yield('sidebar')
 
                 @yield('content')
             </div>
         </div>
     @endisset
- 
-     <script>
+    
+    <x:shared.toast />
+    <script>
         (function (window, document, undefined) {
             'use strict';
             if (!('localStorage' in window)) return;
