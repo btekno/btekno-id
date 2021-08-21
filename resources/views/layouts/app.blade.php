@@ -143,6 +143,7 @@
 ])->withFullUrl() !!}
 <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.3/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.3/ionicons/ionicons.js"></script>
+<script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
 
 <livewire:scripts />
 
