@@ -229,6 +229,14 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // Plugins
+        'Carbon'    => Carbon\Carbon::class,
+        'Throttle'  => GrahamCampbell\Throttle\Facades\Throttle::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
+
+        // Helper
+        'Helper' => App\Helpers\Helper::class,
+
     ],
 
 ];

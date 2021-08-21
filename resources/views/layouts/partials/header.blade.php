@@ -58,7 +58,7 @@
                 <div class="header_widgets">
                     @auth
                         <a href="#" aria-expanded="false">
-                            <img src="assets/images/avatars/avatar-2.jpg" class="is_avatar" alt="">
+                            <img loading=lazy src="{{ Helper::getCDNImage(me()->image, 80) }}" class="is_avatar" alt="{{ me()->username }}'s avatar">
                         </a>
                     @else
                         <a href="#" class="is_link">Login or Register</a>

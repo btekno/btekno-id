@@ -139,3 +139,14 @@ if(!function_exists('toast')) {
         ]);
     }
 }
+
+if(!function_exists('me')) {
+    /**
+     * Get Authentication
+     *
+     * @return String
+     */
+    function me() {
+        return auth()->user();
+    }
+}
