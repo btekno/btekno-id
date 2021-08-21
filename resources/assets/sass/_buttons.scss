@@ -5,7 +5,8 @@
   &:hover,
   &:active,
   &:focus {
-    background-color: #6f68ee;
+    background-color: $primary;
+    opacity: .9;
   }
 }
 
@@ -16,36 +17,6 @@
   &:focus,
   &:disabled {
     color: white;
-  }
-}
-
-.btn-blurple {
-  color: white;
-  background-color: #7289da;
-
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: #657ac3;
-    color: white;
-  }
-}
-
-.btn-like {
-  color: $pink !important;
-  border-color: $pink;
-  background-color: rgb(190 100 120 / 20%);
-}
-
-.btn-outline-like {
-  color: $pink;
-  border-color: $pink;
-
-  &:hover,
-  &:active,
-  &:focus {
-    color: $pink;
-    background-color: rgb(190 100 120 / 25%);
   }
 }
 
@@ -109,4 +80,72 @@
 .btn-outline-danger:active {
   background-color: rgb(200 50 50 / 20%);
   color: $danger;
+}
+
+.button.primary:hover, 
+.button.primary:focus, 
+.button.soft-primary:hover, 
+.button.soft-primary:focus, 
+.button.primary.active {
+  color: $white;
+}
+
+.button.icon-label {
+    border: 0;
+    position: relative;
+}
+
+.button.bg-facebook {
+  background-color: $facebook;
+  &:hover,
+  &:focus,
+  &:disabled {
+    background-color: $facebook;
+    opacity: .9;
+  }
+}
+
+.button.bg-google {
+  background-color: $google;
+  &:hover,
+  &:focus,
+  &:disabled {
+    background-color: $google;
+    opacity: .9;
+  }
+}
+
+.button.bg-twitter {
+  background-color: $twitter;
+  &:hover,
+  &:focus,
+  &:disabled {
+    background-color: $twitter;
+    opacity: .9;
+  }
+}
+
+.button.icon-label .inner-icon {
+  line-height: 1;
+  position: absolute;
+  width: 2.5em;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, .1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button.icon-label .inner-icon:not(:last-child) {
+  top: 0;
+  left: 0;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.button.icon-label .inner-text {
+  padding-left: 2em;
 }

@@ -1,230 +1,119 @@
+@php($fullscreen = true)
 @extends('layouts.app')
+
+{{-- Meta --}}
 @section('title', 'Login')
+@section('description', 'Discussion and hangout while doing a lot of things')
+@section('url', url()->current())
 
-@section('wrapper-class', 'sidebar-colapsed')
+{{-- Content --}}
 @section('content')
-
-    <div class="flex flex-col h-screen bg-gray-100">
-        <div class="h-screen">
-            <div class="lg:p-12 max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
-                
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-
-                    <div class="my-0 uk-text-left">
-                        <h4 class="uppercase font-bold mb-0">Log Into</h4>
-                        <img src="{{ asset('assets/images/logo.png') }}" class="mr-2 mb-1 mt-2" alt="Logo" width="150">
-                    </div>
-
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-
-                    <p class="text-muted mb-3">
-                        Use your social media accounts to access all the features.
-                    </p>
-
-                    @if(config('my.plugin.facebook.enable') || config('my.plugin.twitter.enable') || config('my.plugin.google.enable'))
-                        <div class="mb-3">
-                            @if(config('my.plugin.facebook.enable'))
-                                <a href="{{ route('my.social', 'facebook') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label bg-facebook">
-                                    <span class="inner-icon"><i class="icon-brand-facebook-f"></i></span>
-                                    <span class="inner-text hide-mobile"> &nbsp;Facebook</span>
-                                </a>
-                            @endif
-
-                            @if(config('my.plugin.google.enable'))
-                                <a href="{{ route('my.social', 'google') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label bg-google">
-                                    <span class="inner-icon"><i class="icon-brand-google"></i></span>
-                                    <span class="inner-text hide-mobile"> &nbsp;Google</span>
-                                </a>
-                            @endif
-
-                            @if(config('my.plugin.twitter.enable'))
-                                <a href="{{ route('my.social', 'twitter') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label bg-twitter">
-                                    <span class="inner-icon"><i class="icon-brand-twitter"></i></span>
-                                    <span class="inner-text hide-mobile"> &nbsp;Twitter</span>
-                                </a>
-                            @endif
-                        </div>
-                    @endif
-
-                    <p class="uk-text-muted mb-3">
-                        Or simply enter your email and password
-                    </p>
-
-                    <div class="mb-2">
-                        <input id="email" type="text" class="uk-input bg-secondary uk-form-width-large @error('email') uk-form-danger @enderror" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="{{ __('E-Mail or Username') }}">
-                        @error('email')
-                            <p class="uk-text-left uk-text-small uk-text-danger mt-1 ml-2">{{ $message }}</p>  
-                        @enderror
-                    </div>
-
-                    <div class="mb-2">
-                        <input id="password" type="password" class="uk-input bg-secondary uk-form-width-large @error('password') uk-form-danger @enderror" name="password" value="{{ old('password') }}" autocomplete="current-password" placeholder="{{ __('Password') }}">
-                        @error('password')
-                            <p class="uk-text-left uk-text-small uk-text-danger mt-1 ml-2">{{ $message }}</p>  
-                        @enderror
-                    </div>
-
-                    @if(config('my.plugin.recaptcha.enable'))
-                        <div class="uk-form-group mt-3 mb-3">
-                            <script src="https://www.google.com/recaptcha/api.js"></script>
-                            <div class="g-recaptcha" data-sitekey="{{ config('my.plugin.recaptcha.key') }}"></div>
-                            @error('g-recaptcha-response')
-                                <small class="text-danger ml-2">
-                                    <small>{{ $message }}</small>
-                                </small>
-                            @enderror
-                        </div>
-                    @endif
-
-                    <div class="flex items-center lg:justify-between justify-around">
-                        <div class="checkbox">
-                            <input type="checkbox" id="chekcbox1" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label for="remember"><span class="checkbox-icon"></span>
-                                {{ __('Remember Me') }}
-                            </label>
-                        </div>
-
-                        <a href="{{ route('password.request') }}" class="uk-flex-1 uk-text-right">
-                            Forgot Password ?
-                        </a>
-                    </div>
-
-
-
-                    <button type="submit" class="button large block primary mb-3">{{ __('Sign In') }}</button> 
-
-                    @if(config('my.enable.registration'))
-                        <p class="uk-text-muted">
-                            Don't have an account? <a href="{{ route('register') }}{{ request()->has('affiliate') ? '?affiliate='.request('affiliate') : '' }}" class="uk-text-bold">Sign Up</a>
-                        </p>
-                    @endif
-
-                    @if(request()->has('redirect'))
-                        <input type="hidden" name="redirect" value="{{ request()->redirect }}">
-                    @endif
-
-                </form>
-            </div>
-        </div>    
-    </div>
-
-
-    {{-- <div uk-height-viewport class="uk-flex uk-flex-middle uk-grid-collapse uk-grid-match" uk-grid>
-        <div class="form-media uk-width-2-3@m uk-width-1-2@s uk-visible@s uk-height-viewport uk-background-cover" data-src="{{ asset('assets/v1/img/bg-login.jpg') }}" uk-img>        
+    <div class="uk-flex uk-flex-middle uk-grid-collapse uk-grid-match" uk-grid>
+        <div class="form-media uk-width-2-3@m uk-width-1-2@s uk-visible\@s uk-height-viewport uk-background-cover" data-src="https://my.btekno.id/assets/v1/img/bg-login.jpg" uk-img>        
 
             <div class="form-media-content uk-light"> 
                 <h1>It's not about coffee or food, <br/>it's about togetherness.</h1>
                 <div class="form-media-footer">
+                    
                 </div>
             </div>
         </div>
-        <div class="uk-width-1-3@m uk-width-1-2@s uk-animation-slide-right-medium">
+        <div class="uk-width-1-3@m uk-width-1-2@s">
 
-            <div class="px-5">
+            <div class="px-4 overflow-auto h-100">
                 
-                <div class="my-0 uk-text-left">
-                    <h4 class="uk-text-uppercase uk-text-small mb-0"><strong>Log Into</strong></h4>
-                    <img src="{!! config('my.assets.logo') !!}" class="mr-2 mb-1 mt-2" alt="Logo" width="150">
+                <div class="my-0 ">
+                    <h4 class="text-uppercase small mb-0 mb-0"><strong>Log Into</strong></h4>
+                    <img src="{!! asset('assets/images/logo.png') !!}" class="mr-2 mb-1 mt-2" alt="Logo" width="175">
                 </div>
 
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                <p class="uk-text-muted mb-3">
+                <p class="fw-normal text-muted mb-2">
                     Use your social media accounts to access all the features.
                 </p>
 
-                @if(config('my.plugin.facebook.enable') || config('my.plugin.twitter.enable') || config('my.plugin.google.enable'))
-                <div class="mb-3">
-                    @if(config('my.plugin.facebook.enable'))
-                        <a href="{{ route('my.social', 'facebook') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label bg-facebook">
-                            <span class="inner-icon"><i class="icon-brand-facebook-f"></i></span>
-                            <span class="inner-text hide-mobile"> &nbsp;Facebook</span>
-                        </a>
-                    @endif
+                <div class="mb-2">
+                    <a href="{{ route('social', 'facebook') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label me-1 bg-facebook">
+                        <span class="inner-icon"><i class="icon-brand-facebook-f"></i></span>
+                        <span class="inner-text d-none d-sm-inline-block small"> &nbsp;Facebook</span>
+                    </a>
 
-                    @if(config('my.plugin.google.enable'))
-                        <a href="{{ route('my.social', 'google') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label bg-google">
-                            <span class="inner-icon"><i class="icon-brand-google"></i></span>
-                            <span class="inner-text hide-mobile"> &nbsp;Google</span>
-                        </a>
-                    @endif
+                    <a href="{{ route('social', 'google') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label me-1 bg-google">
+                        <span class="inner-icon"><i class="icon-brand-google"></i></span>
+                        <span class="inner-text d-none d-sm-inline-block small"> &nbsp;Google</span>
+                    </a>
 
-                    @if(config('my.plugin.twitter.enable'))
-                        <a href="{{ route('my.social', 'twitter') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label bg-twitter">
-                            <span class="inner-icon"><i class="icon-brand-twitter"></i></span>
-                            <span class="inner-text hide-mobile"> &nbsp;Twitter</span>
-                        </a>
-                    @endif
+                    <a href="{{ route('social', 'twitter') }}{{ request()->has('redirect') ? '?redirect='.request('redirect') : '' }}" class="button primary icon-label me-1 bg-twitter">
+                        <span class="inner-icon"><i class="icon-brand-twitter"></i></span>
+                        <span class="inner-text d-none d-sm-inline-block small"> &nbsp;Twitter</span>
+                    </a>
                 </div>
-                @endif
 
-                <p class="uk-text-muted mb-3">
+                <p class="fs-6 text-muted mb-3">
                     Or simply enter your email and password
                 </p>
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <div class="mb-2">
-                        <div class="uk-inline">
-                            <span class="uk-form-icon icon-feather-user"></span>
-                            <input id="email" type="text" class="uk-input bg-secondary uk-form-width-large @error('email') uk-form-danger @enderror" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="{{ __('E-Mail or Username') }}">
-                        </div>
-                        @error('email')
-                            <p class="uk-text-left uk-text-small uk-text-danger mt-1 ml-2">{{ $message }}</p>  
+                    <div class="form-group mb-2">
+                        <input id="username" type="text" class="form-control bg-secondary {{ session('error') ? 'is-invalid' : '' }} @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="{{ __('E-Mail or Username') }}">
+                        @error('username')
+                            <div class="ms-1 small invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
-
-                    <div class="mb-2">
-                        <div class="uk-inline">
-                            <span class="uk-form-icon icon-feather-lock"></span>
-                            <input id="password" type="password" class="uk-input bg-secondary uk-form-width-large @error('password') uk-form-danger @enderror" name="password" value="{{ old('password') }}" autocomplete="current-password" placeholder="{{ __('Password') }}">
-                        </div>
-                        @error('password')
-                            <p class="uk-text-left uk-text-small uk-text-danger mt-1 ml-2">{{ $message }}</p>  
-                        @enderror
-                    </div>
-
-                    @if(config('my.plugin.recaptcha.enable'))
-                        <div class="uk-form-group mt-3 mb-3">
-                            <script src="https://www.google.com/recaptcha/api.js"></script>
-                            <div class="g-recaptcha" data-sitekey="{{ config('my.plugin.recaptcha.key') }}"></div>
-                            @error('g-recaptcha-response')
-                                <small class="text-danger ml-2">
-                                    <small>{{ $message }}</small>
-                                </small>
-                            @enderror
-                        </div>
-                    @endif
-
-                    <div class="uk-grid-small uk-child-width-auto uk-grid my-3">
-                        <label for="remember">
-                            <input class="uk-checkbox mr-1" id="remember" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                            {{ __('Remember Me') }}
-                        </label>
-                        @if(config('my.enable.verify_email'))
-                            <a href="{{ route('password.request') }}" class="uk-flex-1 uk-text-right">
-                                Forgot Password ?
-                            </a>
+                        @if(session()->has('error'))
+                            <span class="invalid-feedback ms-2" role="alert">
+                                <small>{!! session('error') !!}</small>
+                            </span>
                         @endif
                     </div>
 
-                    <button type="submit" class="button large block primary mb-3">{{ __('Sign In') }}</button> 
+                    <div class="form-group mb-2">
+                        <input id="password" type="password" class="form-control bg-secondary @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autocomplete="current-password" placeholder="{{ __('Password') }}">
+                        @error('password')
+                            <small class="ms-1 text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
 
-                    @if(config('my.enable.registration'))
-                        <p class="uk-text-muted">
-                            Don't have an account? <a href="{{ route('register') }}{{ request()->has('affiliate') ? '?affiliate='.request('affiliate') : '' }}" class="uk-text-bold">Sign Up</a>
-                        </p>
-                    @endif
+                    <div class="form-group mt-3 mb-3">
+                        <script src="https://www.google.com/recaptcha/api.js"></script>
+                        <div class="g-recaptcha" data-sitekey="6Lekpr8ZAAAAAJ3JzPiBooYjB5fCxHXw10ifcCcU"></div>
+                        @error('g-recaptcha-response')
+                            <small class="text-danger ms-2">
+                                <small>{{ $message }}</small>
+                            </small>
+                        @enderror
+                    </div>
+
+                    <div class="d-flex justify-content-between my-1">
+                        <div class="form-check">
+                            <input class="form-check-input" id="remember" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="remember">
+                                {{ __('Remember Me') }}
+                            </label>
+                        </div>
+                        <a href="{{ route('password.request') }}">
+                            {{ __('Forgot Password ?') }}
+                        </a>
+                    </div>
+
+                    <div class="btn-group btn-group-lg d-flex mb-3" role="group" aria-label="Login Button">
+                        <button type="submit" class="btn btn-primary text-white btn-block" name="submit" value="login">
+                            <small>
+                                <x-heroicon-o-lock-closed />
+                                {{ __('Sign In') }}
+                            </small>
+                        </button>
+                        <button type="submit" class="btn btn-dark btn-block" name="submit" value="magic-link">
+                            <small>
+                                <x-heroicon-o-mail />
+                                {{ __('Magic Link') }}
+                            </small>
+                        </button>
+                    </div>
+
+                    <p class="text-muted">
+                        Don't have an account? <a href="{{ route('register') }}" class="fw-bold">Sign Up</a>
+                    </p>
 
                     @if(request()->has('redirect'))
                         <input type="hidden" name="redirect" value="{{ request()->redirect }}">
@@ -234,5 +123,5 @@
             </div>
 
         </div>
-    </div> --}}
+    </div>
 @endsection

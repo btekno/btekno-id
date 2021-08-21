@@ -32,8 +32,7 @@
     {!! Minify::stylesheet([
         '/assets/css/icons.css', 
         '/assets/css/uikit.css', 
-        '/assets/css/style.css', 
-        '/assets/css/tailwind.css'
+        '/assets/css/style.css'
     ])->withFullUrl() !!}
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -49,16 +48,20 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head> 
 <body>
-    <div id="app">
-        @include('layouts.partials.sidenav')
-        <div id="wrapper" class="@yield('wrapper-class')">
-            
-            @include('layouts.partials.header')
-            @yield('sidebar')
+    @isset($fullscreen)
+        @yield('content')
+    @else
+        <div id="app">
+            @include('layouts.partials.sidenav')
+            <div id="wrapper" class="@yield('wrapper-class')">
+                
+                @include('layouts.partials.header')
+                @yield('sidebar')
 
-            @yield('content')
+                @yield('content')
+            </div>
         </div>
-    </div>
+    @endisset
  
      <script>
         (function (window, document, undefined) {

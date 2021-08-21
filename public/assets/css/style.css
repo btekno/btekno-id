@@ -793,7 +793,7 @@ input.keyword-input {
 /* Common Styles
 ------------------------------------- */
 body, html {
-  background-color: #f9fafb !important;
+  background-color: #fff !important;
 }
 
 body {
@@ -8134,7 +8134,9 @@ header .header_inner .right_side {
 }
 
 .main_content {
-  padding-top: 65px;
+  margin-top: 65px;
+  overflow: auto;
+  height: calc(100vh - 65px);
 }
 
 button.button.dark1,
@@ -9809,7 +9811,7 @@ html.dark,
 }
 
 .dark header {
-  border-bottom-width: 1px;
+  border-bottom: 1px solid #424242;
 }
 
 .dark .uk-offcanvas-flip .uk-open > .uk-offcanvas-bar {
