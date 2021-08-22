@@ -9,6 +9,8 @@ use Intervention\Image\Facades\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+use App\Helpers\Helper;
+
 class Profile extends Component
 {
     use WithFileUploads;
@@ -43,7 +45,6 @@ class Profile extends Component
         $this->user = me();
         
         # Profil Pribadi
-        $this->image = $this->user->image;
         $this->name = $this->user->name;
         $this->phone = $this->user->phone;
         $this->gender = $this->user->gender;
@@ -69,8 +70,8 @@ class Profile extends Component
     public function updateProfile()
     {
         $this->validate([
-            'name'      => ['nullable', 'max:30'],
-            'bio'       => ['nullable', 'max:160']
+            'name'      => ['required', 'nullable', 'max:30'],
+            'bio'       => ['required', 'nullable', 'max:160']
         ]);
 
         $this->user->name = $this->name;
@@ -98,17 +99,15 @@ class Profile extends Component
         ]);
 
         if($this->image):
-            $oldPhoto = explode('storage/', $this->user->image);
-            if(array_key_exists(1, $oldPhoto)):
-                Storage::delete($oldPhoto[1]);
-            endif;
             
+            Helper::deleteCDNImage($this->user->image); 
+
             $img = Image::make($this->image)->fit(400)->encode('webp', 100);
             $imageName = Str::orderedUuid().'.webp';
-            Storage::disk('public')->put('avatars/'.$imageName, (string) $img);
-            $image = config('app.url').'/storage/avatars/'.$imageName;
-            $this->user->image = $image;
+            Storage::disk('s3')->put('imagekit/avatars/'.$imageName, $img->__toString(), 'public');
+            $this->user->image = Storage::disk('s3')->url('imagekit/avatars/'.$imageName);
         endif;
+
         $this->user->save();
 
         $this->emit('avatarUpdated');
@@ -119,25 +118,19 @@ class Profile extends Component
 
     public function resetAvatar()
     {
-        $oldPhoto = explode('storage/', $this->user->image);
-        if(array_key_exists(1, $oldPhoto)):
-            Storage::delete($oldPhoto[1]);
-        endif;
+        Helper::deleteCDNImage($this->user->image); 
 
         $this->user->image = 'https://avatar.tobi.sh/'.Str::orderedUuid().'.svg?text='.strtoupper(substr($this->user->username, 0, 2));
         $this->user->save();
         
         $this->emit('avatarResetted');
-        logify(request(), 'User', me(), 'Resetted avatar to default');
+        logify(request(), 'User', me(), 'Updated avatar provider to Initial');
         return toast($this, 'success', 'Your avatar has been resetted!');
     }
 
     public function useGravatar()
     {
-        $oldPhoto = explode('storage/', $this->user->image);
-        if(array_key_exists(1, $oldPhoto)):
-            Storage::delete($oldPhoto[1]);
-        endif;
+        Helper::deleteCDNImage($this->user->image); 
 
         $this->user->image = 'https://secure.gravatar.com/avatar/'.md5(me()->email).'?s=500&d=identicon';
         $this->user->save();
@@ -146,7 +139,6 @@ class Profile extends Component
         logify(request(), 'User', me(), 'Updated avatar provider to Gravatar');
         
         toast($this, 'success', 'Your avatar has been switched to Gravatar!');
-        // return redirect()->route('member.settings.profile');
     }
 
     public function updateSocial()

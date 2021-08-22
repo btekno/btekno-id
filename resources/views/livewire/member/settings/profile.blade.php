@@ -7,31 +7,26 @@
             </div>
         </div>
         <div class="col-md-8">
-            <form wire:submit.prevent="updateProfile">
-                <div class="form-group mb-3">
-                    <label class="form-label">Avatar</label>
-                    <div class="form-file">
-                        <input class="form-control" wire:model="image" type="file" style="padding:.75rem 1.2rem">
-                        <button wire:loading.attr="disabled" wire:click="useGravatar" class="btn btn-success text-white border-0 mt-3">
-                            Use Gravatar
-                        </button>
-                        <button wire:loading.attr="disabled" wire:click="resetAvatar" class="btn btn-danger text-white border-0 mt-3">
-                            Reset
-                        </button>
-                    </div>
+            <form wire:submit.prevent="updatePhoto">
+
+                <div class="mb-3">
+                    <button wire:loading.attr="disabled" wire:click="useGravatar" class="btn btn-info text-white border-0 mt-3">
+                        Use Gravatar
+                    </button>
+                    <button wire:loading.attr="disabled" wire:click="resetAvatar" class="btn btn-danger text-white border-0 mt-3">
+                        Use Initial
+                    </button>
                 </div>
-                <div wire:loading wire:target="image">
-                    <div class="spinner-border spinner-border-sm" role="status"></div>
-                </div>
+                
                 @error('image')
                     <div class="text-danger fw-bold mt-3">{{ $message }}</div>
                 @else
                     @if($image)
                         <div>
-                            <img loading=lazy class="avatar-100 rounded-circle mt-2 mb-3" src="{{ empty($image) ? $image->temporaryUrl() : $image }}" height="100" width="100" />
+                            <img loading=lazy class="avatar-100 rounded-circle mt-2 mb-3" src="{{ $image->temporaryUrl() }}" height="100" width="100" />
                         </div>
                     @else
-                        @if ($user->image)
+                        @if($user->image)
                             <div>
                                 <img loading=lazy class="avatar-100 rounded-circle mt-2 mb-3"
                                     src="{{ Helper::getCDNImage($user->image, 240) }}" height="100" width="100"
@@ -40,6 +35,20 @@
                         @endif
                     @endif
                 @enderror
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Avatar</label>
+                    <div class="form-file">
+                        <input class="form-control" wire:model="image" type="file" style="padding:.75rem 1.2rem">
+                    </div>
+                </div>
+
+                <x-submit>Upload</x-submit>
+
+                <div wire:loading wire:target="image">
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                </div>
+
             </form>
         </div>
     </div>
@@ -55,7 +64,7 @@
             <form wire:submit.prevent="updateProfile">
                 {{-- Nama --}}
                 <div class="mb-3">
-                    <label class="form-label">Nama Lengkap</label>
+                    <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
                     <input type="text" class="form-control border border-1 @error('name') is-invalid @enderror" value="{{ $user->name }}" 
                         wire:model.defer="name">
                     @error('name')
@@ -66,7 +75,7 @@
                 </div>
                 {{-- Bio --}}
                 <div class="mb-3">
-                    <label class="form-label">Bio</label>
+                    <label class="form-label">Bio <span class="text-danger">*</span></label>
                     <textarea class="form-control border border-1 @error('bio') is-invalid @enderror" rows="3"
                         wire:model.defer="bio">{{ $user->bio }}</textarea>
                     @error('bio')
@@ -77,7 +86,7 @@
                 </div>
                 {{-- Phone --}}
                 <div class="mb-3">
-                    <label class="form-label">Phone Number</label>
+                    <label class="form-label">Nomor HP / WA</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">+62</span>
                         <input type="text" class="form-control border border-1 @error('phone') is-invalid @enderror" value="{{ $user->phone }}" wire:model.defer="phone">
@@ -88,27 +97,29 @@
                         </span>
                     @enderror
                 </div>
-                {{-- Company --}}
+                {{-- Address --}}
                 <div class="mb-3">
-                    <label class="form-label">Company</label>
-                    <input type="text" class="form-control border border-1 @error('company') is-invalid @enderror"
-                        value="{{ $user->company }}" wire:model.defer="company">
-                    @error('company')
+                    <label class="form-label">Alamat</label>
+                    <textarea class="form-control border border-1 @error('address') is-invalid @enderror" rows="3"
+                        wire:model.defer="address">{{ $user->address }}</textarea>
+                    @error('address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
 
-                {{-- $this->phone = $this->user->phone;
+                {{-- 
+                @todo
+                
                 $this->gender = $this->user->gender;
                 $this->birthday = $this->user->birthday;
-                $this->address = $this->user->address;
                 
                 $this->village = $this->user->village;
                 $this->district = $this->user->district;
                 $this->city = $this->user->city;
-                $this->country = $this->user->country; --}}
+                $this->country = $this->user->country; 
+                --}}
                 
                 <x-submit>Simpan Perubahan</x-submit>
             </form>
