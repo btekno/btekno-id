@@ -1,34 +1,38 @@
-<div class="col-lg-8">
-    <div class="card">
-        <div class="card-header py-3">
-            <span class="h5">Theme preferences</span>
-            <div>Choose how Taskord looks to you.</div>
+<div>
+    <div class="row m-0 p-3">
+        <div class="col-md-4">
+            <div class="mt-2">
+                <span class="h5 fw-bold">Theme preferences</span>
+                <div class="text-muted">Choose how {{ env('APP_NAME') }} looks to you.</div>
+            </div>
         </div>
-        <div class="card-body d-flex">
-            <div class="cursor-pointer me-3 card {{ Cookie::get('color_mode') === 'light' ? 'border-primary' : '' }}"
-                wire:click="toggleMode('light')">
-                <img class="rounded-top" src="https://ik.imagekit.io/taskordimg/light_preview_vbmoVL43E.svg" />
-                <div class="card-footer">
-                    <div class="fw-bold">
-                        Default light
+        <div class="col-md-8">
+            <div class="d-flex">
+                <div class="cursor-pointer me-3 card shadow-none {{ me()->dark_mode === 0 ? 'border-primary' : '' }}"
+                    wire:click="toggleMode(0)">
+                    <img class="rounded-top" src="{{ asset('assets/images/preview-light.png') }}" />
+                    <div class="card-footer">
+                        <div class="fw-bold">
+                            Default light
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="cursor-pointer me-3 card {{ Cookie::get('color_mode') === 'dark' ? 'border-primary' : '' }}"
-                wire:click="toggleMode('dark')">
-                <img class="rounded-top" src="https://ik.imagekit.io/taskordimg/dark_preview_9AcAIKv8K.svg" />
-                <div class="card-footer">
-                    <div class="fw-bold">
-                        Default dark
+                <div class="cursor-pointer me-3 card shadow-none {{ me()->dark_mode === 1 ? 'border-primary' : '' }}"
+                    wire:click="toggleMode(1)">
+                    <img class="rounded-top" src="{{ asset('assets/images/preview-dark.png') }}" />
+                    <div class="card-footer">
+                        <div class="fw-bold">
+                            Default dark
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="cursor-pointer card {{ Cookie::get('color_mode') === 'auto' ? 'border-primary' : '' }}"
-                wire:click="toggleMode('auto')">
-                <img class="rounded-top" src="https://ik.imagekit.io/taskordimg/auto_preview_ucGhJPhO-.svg" />
-                <div class="card-footer">
-                    <div class="fw-bold">
-                        System
+                <div class="cursor-pointer card shadow-none {{ me()->dark_mode === 2 ? 'border-primary' : '' }}"
+                    wire:click="toggleMode(2)">
+                    <img class="rounded-top" src="{{ asset('assets/images/preview-auto.png') }}" />
+                    <div class="card-footer">
+                        <div class="fw-bold">
+                            System
+                        </div>
                     </div>
                 </div>
             </div>

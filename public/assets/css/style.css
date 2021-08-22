@@ -9917,6 +9917,9 @@ html.dark,
 .dark .form-check-input:checked[type=checkbox] {
   background: #92c83b!important;
 }
+hr {
+  background-color: #808080!important;
+}
 
 /* -------------------------------------------------------------- */
 /* Button Loader
@@ -9992,4 +9995,26 @@ html.dark,
 .dark input[type="email"], 
 .dark input[type="number"] {
   color: #cacaca;
+}
+
+.dark .modal-content, 
+.dark .list-group-item {
+  background-color: #333333;
+}
+
+.dark .page-link, 
+.dark .page-item.disabled .page-link {
+  background-color: #2e3136;
+  border: 1px solid #393e42;
+}
+
+.dark .form-control:focus {
+  color: #ffffff!important;
+}
+
+.dark .text-muted {
+  color: #9fa5ab!important;
+}
+.dark hr {
+  background-color: #1b1b1b!important;
 }

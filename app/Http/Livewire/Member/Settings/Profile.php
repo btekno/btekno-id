@@ -66,76 +66,87 @@ class Profile extends Component
         $this->youtube = $this->user->youtube;
     }
 
-    public function updatedAvatar()
-    {
-        $this->validate([
-            'image' => ['nullable', 'mimes:jpeg,jpg,png,gif', 'max:1024'],
-        ]);
-    }
-
     public function updateProfile()
     {
         $this->validate([
             'name'      => ['nullable', 'max:30'],
-            'lastname'  => ['nullable', 'max:30'],
-            'bio'       => ['nullable', 'max:160'],
-            'location'  => ['nullable', 'max:30'],
-            'company'   => ['nullable', 'max:30'],
+            'bio'       => ['nullable', 'max:160']
+        ]);
+
+        $this->user->name = $this->name;
+        $this->user->bio = $this->bio;
+        $this->user->phone = $this->phone;
+        $this->user->gender = $this->gender;
+        $this->user->birthday = $this->birthday;
+        $this->user->address = $this->address;
+        $this->user->village = $this->village;
+        $this->user->district = $this->district;
+        $this->user->city = $this->city;
+        $this->user->country = $this->country;
+
+        $this->user->save();
+
+        $this->emit('profileUpdated');
+        logify(request(), 'User', me(), 'Updated the profile settings');
+        return toast($this, 'success', 'Your profile has been updated!');
+    }
+
+    public function updatePhoto()
+    {
+        $this->validate([
             'image'     => ['nullable', 'mimes:jpeg,jpg,png,gif', 'max:1024'],
         ]);
 
-        if ($this->image) {
+        if($this->image):
             $oldPhoto = explode('storage/', $this->user->image);
-            if (array_key_exists(1, $oldPhoto)) {
+            if(array_key_exists(1, $oldPhoto)):
                 Storage::delete($oldPhoto[1]);
-            }
-            $img = Image::make($this->image)
-                    ->fit(400)
-                    ->encode('webp', 100);
+            endif;
+            
+            $img = Image::make($this->image)->fit(400)->encode('webp', 100);
             $imageName = Str::orderedUuid().'.webp';
             Storage::disk('public')->put('avatars/'.$imageName, (string) $img);
             $image = config('app.url').'/storage/avatars/'.$imageName;
             $this->user->image = $image;
-        }
-
-        $this->user->name = $this->name;
-        $this->user->lastname = $this->lastname;
-        $this->user->bio = $this->bio;
-        $this->user->location = $this->location;
-        $this->user->company = $this->company;
+        endif;
         $this->user->save();
-        $this->emit('profileUpdated');
-        logify(request(), 'User', me(), 'Updated the profile settings');
 
-        return toast($this, 'success', 'Your profile has been updated!');
+        $this->emit('avatarUpdated');
+        logify(request(), 'User', me(), 'Updated the avatar');
+
+        return toast($this, 'success', 'Your avatar has been updated!');
     }
 
     public function resetAvatar()
     {
-        $oldPhoto = explode('storage/', $this->user->avatar);
-        if (array_key_exists(1, $oldPhoto)) {
+        $oldPhoto = explode('storage/', $this->user->image);
+        if(array_key_exists(1, $oldPhoto)):
             Storage::delete($oldPhoto[1]);
-        }
-        $this->user->avatar = 'https://avatar.tobi.sh/'.Str::orderedUuid().'.svg?text='.strtoupper(substr($this->user->username, 0, 2));
+        endif;
+
+        $this->user->image = 'https://avatar.tobi.sh/'.Str::orderedUuid().'.svg?text='.strtoupper(substr($this->user->username, 0, 2));
         $this->user->save();
+        
         $this->emit('avatarResetted');
         logify(request(), 'User', me(), 'Resetted avatar to default');
-
         return toast($this, 'success', 'Your avatar has been resetted!');
     }
 
     public function useGravatar()
     {
-        $oldPhoto = explode('storage/', $this->user->avatar);
-        if (array_key_exists(1, $oldPhoto)) {
+        $oldPhoto = explode('storage/', $this->user->image);
+        if(array_key_exists(1, $oldPhoto)):
             Storage::delete($oldPhoto[1]);
-        }
-        $this->user->avatar = 'https://secure.gravatar.com/avatar/'.md5(me()->email).'?s=500&d=identicon';
+        endif;
+
+        $this->user->image = 'https://secure.gravatar.com/avatar/'.md5(me()->email).'?s=500&d=identicon';
         $this->user->save();
+
         $this->emit('gravatarUsed');
         logify(request(), 'User', me(), 'Updated avatar provider to Gravatar');
-
-        return toast($this, 'success', 'Your avatar has been switched to Gravatar!');
+        
+        toast($this, 'success', 'Your avatar has been switched to Gravatar!');
+        // return redirect()->route('member.settings.profile');
     }
 
     public function updateSocial()

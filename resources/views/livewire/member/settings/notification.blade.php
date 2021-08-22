@@ -1,20 +1,22 @@
-<div class="col-lg-8">
-    <div class="card">
-        <div class="card-header py-3">
-            <span class="h5">Notifications</span>
-            <div>Choose how you receive notifications.</div>
+<div>
+    <div class="row m-0 p-3">
+        <div class="col-md-4">
+            <div class="mt-2">
+                <span class="h5 fw-bold">Notifications</span>
+                <div class="text-muted">Choose how you receive notifications.</div>
+            </div>
         </div>
-        <div class="card-body">
-            <div>
-                <div class="mb-2">Get all notifications via email</div>
+        <div class="col-md-8">
+            <div class="mb-3">
+                <label class="form-label">Get all notifications via email</label>
                 <div class="form-check">
                     <input wire:click="notificationsEmail" id="notificationsEmail" class="form-check-input"
                         type="checkbox" {{ $user->notifications_email ? 'checked' : '' }}>
                     <label for="notificationsEmail" class="form-check-label">Email</label>
                 </div>
             </div>
-            <div>
-                <div class="mb-2 mt-3">Get all notifications via web</div>
+            <div class="mb-3">
+                <label class="form-label">Get all notifications via web</label>
                 <div class="form-check">
                     <input wire:click="notificationsWeb" id="notificationsWeb" class="form-check-input" type="checkbox"
                         {{ $user->notifications_web ? 'checked' : '' }}>

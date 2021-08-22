@@ -61,6 +61,7 @@ class CreateUsersTable extends Migration
             $table->string('status')->nullable();
             $table->string('status_emoji')->nullable();
             $table->string('timezone')->nullable();
+            $table->boolean('dark_mode')->default(false);
 
             $table->string('last_ip')->nullable();
             $table->dateTime('last_active')->nullable();

@@ -21,12 +21,13 @@ class Appearance extends Component
 
     public function toggleMode($mode)
     {
-        Cookie::queue('color_mode', $mode, config('session.lifetime'));
+        $this->user->dark_mode = $mode;
+        $this->user->save();
         $this->emit('toggledMode');
         
         logify(request(), 'User', me(), 'Toggled appearance');
 
-        return redirect()->route('user.settings.appearance');
+        return redirect()->route('member.settings.appearance');
     }
 
     public function render(): View

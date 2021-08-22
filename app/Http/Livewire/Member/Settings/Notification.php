@@ -21,7 +21,6 @@ class Notification extends Component
         $this->emit('toggledNotificationsEmail');
         
         logify(request(), 'User', me(), 'Toggled the email notification settings');
-
         return toast($this, 'success', 'Notification settings has been updated');
     }
 
@@ -32,7 +31,6 @@ class Notification extends Component
         $this->emit('toggledNotificationsWeb');
         
         logify(request(), 'User', me(), 'Toggled the web notification settings');
-
         return toast($this, 'success', 'Notification settings has been updated');
     }
 }

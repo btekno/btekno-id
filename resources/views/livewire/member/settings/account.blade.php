@@ -1,8 +1,8 @@
 <div>
-    <div class="row p-3">
+    <div class="row m-0 p-3">
         <div class="col-md-4">
             <div class="mt-2">
-                <span class="h5">Account</span>
+                <span class="h5 fw-bold">Account</span>
                 <div class="text-muted">Change your username and email.</div>
             </div>
         </div>
@@ -32,15 +32,15 @@
                     @enderror
                 </div>
                 
-                <x-submit />
+                <x-submit>Simpan Perubahan</x-submit>
 
             </form>
         </div>
     </div>
-    <div class="row p-3">
+    <div class="row m-0 p-3">
         <div class="col-md-4">
             <div class="mt-2">
-                <span class="h5">Private Account</span>
+                <span class="h5 fw-bold">Private Account</span>
                 <div class="text-muted">All your information will hidden from public.</div>
             </div>
         </div>

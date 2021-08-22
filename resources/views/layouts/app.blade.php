@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="@auth {{ me()->dark_mode == 1 ? 'dark' : '' }} @endauth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
     <meta name="author" content="Noviyanto Rahmadi <novay@btekno.id">
     <meta name="keywords" content="Website Resmi Borneo Teknomedia, Cv">
     <meta name="description" content="@yield('description')">
+    <meta name="turbolinks-cache-control" content="no-preview">
     
     {{-- Twitter --}}
     <meta name="twitter:card" content="summary_large_image">
@@ -38,15 +39,27 @@
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    @if (Cookie::get('color_mode') === 'dark')
-        <link href="{{ mix('css/dark-mode.css') }}" rel="stylesheet">
-    @endif
-    @if (Cookie::get('color_mode') === 'auto')
-        <link href="{{ mix('css/auto-mode.css') }}" rel="stylesheet">
-    @endif
 
     <livewire:styles />
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <livewire:scripts />
+    {{-- <script src="https://cdn.jsdelivr.net/npm/turbolinks@5.2.0/dist/turbolinks.min.js"></script> --}}
+
+    {!! Minify::javascript([
+        '/assets/js/jquery-3.3.1.min.js', 
+        '/assets/js/tippy.all.min.js', 
+        '/assets/js/uikit.js', 
+        '/assets/js/simplebar.js', 
+        '/assets/js/custom.js', 
+        '/assets/js/bootstrap-select.min.js'
+    ])->withFullUrl() !!}
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.3/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.3/ionicons/ionicons.js"></script>
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+
+    <script src="{{ mix('js/bootstrap.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </head> 
 <body>
     <x:shared.toast />
@@ -106,21 +119,30 @@
             </div>
         </div>
     @endisset
-    
-    <script>
+
+    <!-- For Night mode -->
+     <script>
         (function (window, document, undefined) {
             'use strict';
             if (!('localStorage' in window)) return;
             var nightMode = localStorage.getItem('gmtNightMode');
             if (nightMode) {
-                document.documentElement.className += 'night-mode';
+                document.documentElement.className += ' night-mode';
             }
         })(window, document);
+    
         (function (window, document, undefined) {
+    
             'use strict';
+    
+            // Feature test
             if (!('localStorage' in window)) return;
+    
+            // Get our newly insert toggle
             var nightMode = document.querySelector('#night-mode');
             if (!nightMode) return;
+    
+            // When clicked, toggle night mode on or off
             nightMode.addEventListener('click', function (event) {
                 event.preventDefault();
                 document.documentElement.classList.toggle('dark');
@@ -130,26 +152,9 @@
                 }
                 localStorage.removeItem('gmtNightMode');
             }, false);
+    
         })(window, document);
     </script>
 </body>
-
-{!! Minify::javascript([
-    '/assets/js/jquery-3.3.1.min.js', 
-    '/assets/js/tippy.all.min.js', 
-    '/assets/js/uikit.js', 
-    '/assets/js/simplebar.js', 
-    '/assets/js/custom.js', 
-    '/assets/js/bootstrap-select.min.js'
-])->withFullUrl() !!}
-<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.3/ionicons/ionicons.esm.js"></script>
-<script nomodule="" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.3/ionicons/ionicons.js"></script>
-<script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
-
-<livewire:scripts />
-
-<script src="{{ mix('js/bootstrap.js') }}" defer></script>
-<script src="{{ mix('js/app.js') }}" defer></script>
-
 @yield('js')
 </html>

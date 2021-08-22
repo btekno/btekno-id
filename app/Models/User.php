@@ -10,17 +10,21 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\Uuid;
 
+use Rennokki\QueryCache\Traits\QueryCacheable;
+
 use App\Jobs\VerifyEmailQueue;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use QueryCacheable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public $cacheFor = 3600;
+    public $cacheTags = ['users'];
+    public $cachePrefix = 'users_';
+
+    protected static $flushCacheOnUpdate = true;
+
     protected $fillable = [
         'uuid', 
         'image', 
@@ -60,16 +64,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'status', 
         'status_emoji', 
         'timezone', 
+        'dark_mode', 
         'last_ip', 
         'last_active', 
         'api_token', 
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'plain',
@@ -77,20 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'api_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Generate UUID automatically
-     *
-     * @return void
-     */
     public static function boot()
     {
         parent::boot();
@@ -99,11 +89,6 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    /**
-     * Send the email verification notification.
-     *
-     * @return void
-     */
     public function sendEmailVerificationNotification()
     {
         VerifyEmailQueue::dispatch($this);
