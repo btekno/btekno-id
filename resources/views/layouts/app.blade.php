@@ -21,7 +21,7 @@
     <meta property="og:url" content="@yield('url')">
     <meta property="og:type" content="article">
     
-    <title>@yield('title')</title>
+    <title>@yield('title') Btekno</title>
 
     {{-- Apple Devices --}}
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,7 +32,8 @@
     {!! Minify::stylesheet([
         '/assets/css/icons.css', 
         '/assets/css/uikit.css', 
-        '/assets/css/style.css'
+        '/assets/css/style.css', 
+        '/assets/css/tailwind.css'
     ])->withFullUrl() !!}
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -48,6 +49,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head> 
 <body>
+    <x:shared.toast />
     @isset($fullscreen)
         @yield('content')
     @else
@@ -105,14 +107,13 @@
         </div>
     @endisset
     
-    <x:shared.toast />
     <script>
         (function (window, document, undefined) {
             'use strict';
             if (!('localStorage' in window)) return;
             var nightMode = localStorage.getItem('gmtNightMode');
             if (nightMode) {
-                document.documentElement.className += ' night-mode';
+                document.documentElement.className += 'night-mode';
             }
         })(window, document);
         (function (window, document, undefined) {

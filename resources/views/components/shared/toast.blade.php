@@ -1,4 +1,4 @@
-<div class="position-fixed top-0 end-0" style="z-index: 5">
+<div class="position-fixed top-0 end-0" style="z-index: 500">
     <div id="liveToast" class="toast hide m-3" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div id="toast-icon" class="rounded-start d-flex align-items-center px-3"></div>

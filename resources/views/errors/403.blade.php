@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <img loading=lazy src="{{ asset('assets/images/logo-small.png') }}" />
+        <img loading=lazy src="{{ asset('assets/images/logo-mobile.png') }}" />
         <h1>Forbidden</h1>
         <p class="info">
             <a href="javascript:;">Kontak Kami</a> —

@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <img loading=lazy src="https://ik.imagekit.io/Bteknoimg/pride_vocaCTHn-.svg" />
+        <img loading=lazy src="{{ asset('assets/images/logo-mobile.png') }}" />
         <h1>Page Expired</h1>
         <p class="info">
             <a href="javascript:;">Kontak Kami</a> —

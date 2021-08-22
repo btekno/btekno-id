@@ -39,6 +39,8 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             \HTMLMin\HTMLMin\Http\Middleware\MinifyMiddleware::class, 
+
+            \App\Http\Middleware\DebugMiddleware::class,
         ],
 
         'api' => [

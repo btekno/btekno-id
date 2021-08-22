@@ -6575,7 +6575,7 @@ header .header_inner .left_side #logo {
 
 header .header_inner .left_side #logo img {
   max-width: none;
-  height: 33px;
+  height: 40px;
 }
 
 header .header_inner .left_side #logo img.logo_inverse,
@@ -9898,4 +9898,98 @@ html.dark,
 .thin-scroll::-webkit-scrollbar {
   width: 8px;
   height: 8px;
+}
+
+/* -------------------------------------------------------------- */
+/* Forms
+----------------------------------------------------------------- */
+.form-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #b1b1b1;
+}
+.heroicon-icon {
+  float: left;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+.dark .form-check-input:checked[type=checkbox] {
+  background: #92c83b!important;
+}
+
+/* -------------------------------------------------------------- */
+/* Button Loader
+----------------------------------------------------------------- */
+.btn-disabled {
+    opacity: 0.65;
+}
+.btn-loading {
+    color: transparent !important;
+    pointer-events: none;
+    position: relative;
+}
+.btn-loading:after {
+    content: '';
+    -webkit-animation: loader 500ms infinite linear;
+    animation: loader 500ms infinite linear;
+    border: 2px solid #fff!important;
+    border-radius: 50%;
+    border-right-color: transparent !important;
+    border-top-color: transparent !important;
+    display: block;
+    height: 1.4em;
+    width: 1.4em;
+    position: absolute;
+    left: calc(50% - (1.4em / 2));
+    top: calc(50% - (1.4em / 2));
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    position: absolute !important;
+}
+@-webkit-keyframes loader {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/* -------------------------------------------------------------- */
+/* Dark Mode
+----------------------------------------------------------------- */
+.dark .border {
+    border: 1px solid #2b2f31!important;
+}
+.dark .input-group-text {
+  background-color: #333333;
+  border: 1px solid #6b747c;
+  color: #f1f1f1;
+}
+.dark .toast {
+  background-color: #1f2425;
+}
+
+.dark select, 
+.dark textarea, 
+.dark input, 
+.dark input[type="text"], 
+.dark input[type="password"], 
+.dark input[type="email"], 
+.dark input[type="number"] {
+  color: #cacaca;
 }

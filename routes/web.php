@@ -39,7 +39,7 @@ Route::namespace('App\Http\Controllers')->domain(env('APP_DOMAIN'))->group(funct
     });
 
     #### Member's Profile
-    Route::prefix('@{username}')->as('member.')->group(function () {
+    Route::prefix('@{username}')->as('members.')->group(function () {
         Route::get('', 'MemberController@profile')->name('index');
         Route::get('following', 'MemberController@profile')->name('following');
         Route::get('followers', 'MemberController@profile')->name('followers');
@@ -70,7 +70,7 @@ Route::namespace('App\Http\Controllers')->domain(env('APP_DOMAIN'))->group(funct
     Route::get('sitemap_users.txt', 'SitemapController@users');
 
     ## Member Area
-    Route::namespace('Member')->middleware(['auth'])->group(function () {
+    Route::namespace('Member')->as('member.')->middleware(['auth'])->group(function () {
         #### Notifications
         Route::prefix('notifications')->as('notifications.')->group(function () {
             Route::view('', 'main.notifications.unread')->name('unread');
@@ -79,15 +79,15 @@ Route::namespace('App\Http\Controllers')->domain(env('APP_DOMAIN'))->group(funct
 
         #### Settings
         Route::prefix('settings')->as('settings.')->group(function () {
-            Route::get('', 'UserController@profileSettings')->name('profile');
-            Route::get('account', 'UserController@accountSettings')->name('account');
-            Route::get('password', 'UserController@passwordSettings')->name('password');
-            Route::get('appearance', 'UserController@appearanceSettings')->name('appearance');
-            Route::get('notifications', 'UserController@notifySettings')->name('notifications');
-            Route::get('api', 'UserController@apiSettings')->name('api');
-            Route::get('sessions', 'UserController@sessionsSettings')->name('sessions');
-            Route::get('logs', 'UserController@logsSettings')->name('logs');
-            Route::get('delete', 'UserController@deleteSettings')->name('delete');
+            Route::get('', 'UserController@profile')->name('profile');
+            Route::get('account', 'UserController@account')->name('account');
+            Route::get('password', 'UserController@password')->name('password');
+            Route::get('appearance', 'UserController@appearance')->name('appearance');
+            Route::get('notifications', 'UserController@notify')->name('notifications');
+            Route::get('api', 'UserController@api')->name('api');
+            Route::get('sessions', 'UserController@sessions')->name('sessions');
+            Route::get('logs', 'UserController@logs')->name('logs');
+            Route::get('delete', 'UserController@delete')->name('delete');
             
             Route::get('data', 'DataController@index')->name('data');
             Route::get('data/export/account', 'DataController@exportAccount')->name('export.account');

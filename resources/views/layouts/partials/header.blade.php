@@ -8,7 +8,7 @@
                 <div id="logo">
                     <a href="{{ route('index') }}"> 
                         <img src="{{ asset('assets/images/logo.png') }}" alt="">
-                        <img src="{{ asset('assets/images/logo-white.png') }}" class="logo_inverse" alt="Logo"> 
+                        <img src="{{ asset('assets/images/logo-light.png') }}" class="logo_inverse" alt="Logo"> 
                         <img src="{{ asset('assets/images/logo.png') }}" class="logo_mobile" alt="">
                     </a>
                 </div>
@@ -33,7 +33,7 @@
                     @endauth
                     <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
                         @auth
-                            <a href="{{ route('index') }}" class="user">
+                            <a href="{{ route('members.index', ['username' => me()->username]) }}" class="user">
                                 <div class="user_avatar">
                                     <img src="{{ Helper::getCDNImage(me()->image, 80) }}" alt="{{ me()->name }}">
                                 </div>
@@ -42,36 +42,49 @@
                                     <span>{{ '@' . me()->username }}</span>
                                 </div>
                             </a>
-                            <hr class="border-gray-100">
-                            <a href="">
+                            <hr class="border-gray-700">
+                            <a href="{{ route('members.index', ['username' => me()->username]) }}">
                                 <span class="iconify" data-icon="uil:user" data-inline="false"></span>
                                 My Account 
                             </a>
-                            <a href="">
+                            <a href="{{ route('member.settings.sessions') }}">
                                 <span class="iconify" data-icon="uil:shield-question" data-inline="false"></span>
                                 Session Device
                             </a>
+                            <a href="{{ route('member.settings.profile') }}">
+                                <span class="iconify" data-icon="uil:setting" data-inline="false"></span>
+                                Settings
+                            </a>
+
+                            @if(me()->is_staff == 1)
+                                <hr class="border-gray-700">
+                                <a href="">
+                                    <span class="iconify" data-icon="uil:setting" data-inline="false"></span>
+                                    Admin Console
+                                </a>
+                            @endif
+                            <hr class="border-gray-700">
                         @endauth
 
                         <a href="#" id="night-mode" class="btn-night-mode">
-                            <span class="iconify" data-icon="uil:moon" data-inline="false"></span> 
-                            Night Mode
+                            @if (Cookie::get('color_mode') === 'dark')
+                                <span class="iconify" data-icon="uil:sun" data-inline="false"></span> 
+                                Light Mode
+                            @else
+                                <span class="iconify" data-icon="uil:moon" data-inline="false"></span> 
+                                Night Mode
+                            @endif
                             <span class="btn-night-mode-switch">
                                 <span class="uk-switch-button"></span>
                             </span>
                         </a>
 
                         @auth
-                            @if(me()->is_staff == 1)
-                                <a href="">
-                                    <span class="iconify" data-icon="uil:setting" data-inline="false"></span>
-                                    Admin Console
-                                </a>
-                            @endif
-                        @endauth
-
-                        @auth
-                            <a class="dropdown-item text-dark" href="{{ route('logout') }}" data-prefetch="false"
+                            <a class="cursor-pointer" data-bs-toggle="modal" data-bs-target="#shortcutsModal">
+                                <span class="iconify" data-icon="uil:keyboard" data-inline="false"></span>
+                                Shortcuts
+                            </a>
+                            <a class="dropdown-item text-danger" href="{{ route('logout') }}" data-prefetch="false"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <span class="iconify" data-icon="uil:signout" data-inline="false"></span>
                                 Logout
@@ -92,3 +105,6 @@
         </div>
     </div>
 </header>
+
+<x-modals.shortcuts />
+<x-modals.lightbox />

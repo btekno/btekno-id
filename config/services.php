@@ -30,4 +30,22 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id'     => '291071192179930',
+        'client_secret' => '47767a8d5b0061f339715cabdb6ac721',
+        'redirect'      => env('APP_URL', 'https://btekno-id.test') . '/login/facebook/callback',
+    ],
+    
+    'google' => [
+        'client_id'     => '221836369774-nru6kmj415ro5jtjl3spfduivqddvhd9.apps.googleusercontent.com',
+        'client_secret' => 'U47GboBExfb3GTuIw6V3ezLZ',
+        'redirect'      => env('APP_URL', 'https://btekno-id.test') . '/login/google/callback',
+    ],
+    
+    'twitter' => [
+        'client_id'     => 'TIVvrhMRm1n6TuEBNtuLpt0tv',
+        'client_secret' => 'baH38IApus6cp9OOfv83lWO0WhDxhBz6A57lVTcGeaOEQitTQs',
+        'redirect'      => env('APP_URL', 'https://btekno-id.test') . '/login/twitter/callback',
+    ],
+
 ];

@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <img loading=lazy src="https://ik.imagekit.io/Bteknoimg/pride_vocaCTHn-.svg" />
+        <img loading=lazy src="{{ asset('assets/images/logo-mobile.png') }}" />
         <h1>Whoa there!</h1>
         <p>You have triggered an abuse detection mechanism.</p>
         <p>Please wait a few minutes before you try again!</p>

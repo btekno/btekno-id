@@ -57,7 +57,7 @@ class LoginController extends Controller
         if(auth()->attempt([$fieldType => $input['username'], 'password' => $input['password']])):
             $request->session()->flash('global', 'Welcome back!');
 
-            me()->notify(new Login($request->ip()));
+            // me()->notify(new Login($request->ip()));
             logify(request(), 'Auth', me(), 'Logged in via Btekno auth with '.me()->email);
 
             return redirect()->route('index');

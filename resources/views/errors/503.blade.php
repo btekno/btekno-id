@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <img loading=lazy src="https://ik.imagekit.io/Bteknoimg/pride_vocaCTHn-.svg" />
+        <img loading=lazy src="{{ asset('assets/images/logo-mobile.png') }}" />
         <h1>Btekno is down!</h1>
         <p>We're doing our best to get Btekno back to normal.</p>
         <p class="info">

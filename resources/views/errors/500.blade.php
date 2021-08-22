@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <img loading=lazy src="https://ik.imagekit.io/Bteknoimg/pride_vocaCTHn-.svg" />
+        <img loading=lazy src="{{ asset('assets/images/logo-mobile.png') }}" />
         <h1>Looks like something went wrong!</h1>
         <p>We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.</p>
         <p class="info">
