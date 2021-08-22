@@ -23,6 +23,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "livewire/livewire": "^2.5",
         "mews/purifier": "^3.3",
+        "nicolaslopezj/searchable": "^1.13",
         "predis/predis": "^1.1",
         "propaganistas/laravel-disposable-email": "^2.1",
         "rennokki/laravel-eloquent-query-cache": "^3.0",

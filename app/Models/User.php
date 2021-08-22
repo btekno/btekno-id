@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\Uuid;
 
 use Rennokki\QueryCache\Traits\QueryCacheable;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 use App\Jobs\VerifyEmailQueue;
 
@@ -18,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
     use QueryCacheable;
+    use SearchableTrait;
 
     public $cacheFor = 3600;
     public $cacheTags = ['users'];
@@ -79,6 +81,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected $searchable = [
+        'columns' => [
+            'users.username'  => 10,
+            'users.name' => 9,
+        ],
     ];
 
     public static function boot()
